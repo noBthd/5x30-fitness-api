@@ -18,10 +18,10 @@ func ConnectDB(cfg *config.Config) {
         "host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
         cfg.DBHost, cfg.DBUser, cfg.DBPassword, cfg.DBName, cfg.DBPort, cfg.SSLMode,
     )
-	database, err := sql.Open("postgres", dsn)
+
+	var err error
+	DB, err = sql.Open("postgres", dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	DB = database
 }
