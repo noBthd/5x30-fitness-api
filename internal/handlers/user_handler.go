@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/yourname/5x30-fitness-api/internal/services"
+	"github.com/noBthd/5x30-fitness-api/internal/services"
 )
 
 func GetUsersHandler(c *gin.Context) {
