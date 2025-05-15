@@ -7,7 +7,7 @@ import (
 
 func GetAllUsers()([]models.User, error) {
 
-    rows, err := db.DB.Query("SELECT id, username, email FROM users")
+    rows, err := db.DB.Query("SELECT * FROM users")
     if err != nil {
         return nil, err
     }
@@ -16,7 +16,7 @@ func GetAllUsers()([]models.User, error) {
     var users []models.User
     for rows.Next() {
         var user models.User
-        err := rows.Scan(&user.ID, &user.Username, &user.Email)
+        err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.RegDate, &user.Email)
         if err != nil {
             return nil, err
         }
