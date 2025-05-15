@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,7 @@ import (
 func GetUsersHandler(c *gin.Context) {
     users, err := services.GetAllUsers()
     if err != nil {
+		log.Println("Failed to get users: ", err)
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch users"})
         return
     }
