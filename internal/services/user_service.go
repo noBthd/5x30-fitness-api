@@ -6,7 +6,6 @@ import (
 )
 
 func GetAllUsers()([]models.User, error) {
-
     rows, err := db.DB.Query("SELECT * FROM users")
     if err != nil {
         return nil, err
@@ -24,4 +23,24 @@ func GetAllUsers()([]models.User, error) {
     }
 
     return users, nil
+}
+
+func UserExists(email string)([]models.User, error) {
+	rows, err := db.DB.Query("SELECT * FROM users WHERE users.email = '" + email + "'")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []models.User
+	for rows.Next() {
+		var user models.User
+		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.RegDate, &user.Email)
+        if err != nil {
+            return nil, err
+        }
+        users = append(users, user)
+	}
+
+	return users, nil
 }

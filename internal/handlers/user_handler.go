@@ -11,9 +11,24 @@ import (
 func GetUsersHandler(c *gin.Context) {
     users, err := services.GetAllUsers()
     if err != nil {
-		log.Println("Failed to get users: ", err)
+		log.Println("GET_ALL_USERS ERROR: ", err)
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch users"})
         return
     }
     c.JSON(http.StatusOK, users)
 }
+
+func UserExists(c *gin.Context) {
+	email := c.Query("email")
+	
+	users, err := services.UserExists(email)
+	if err != nil {
+		log.Println("USER_EXISTS ERROR: ", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to find user"})
+		return
+	}
+
+	c.JSON(http.StatusOK, users)
+}
+
+

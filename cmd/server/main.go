@@ -19,5 +19,7 @@ func main() {
 
     router.GET("/users", handlers.GetUsersHandler)
 
+	router.GET("/isExists", handlers.UserExists)
+
     router.Run(":8080")
 }
