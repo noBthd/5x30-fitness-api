@@ -21,5 +21,7 @@ func main() {
 
 	router.GET("/isExists", handlers.UserExists)
 
+	router.POST("/signUp", handlers.CreateUser)
+
     router.Run(":8080")
 }

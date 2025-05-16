@@ -44,3 +44,14 @@ func UserExists(email string)([]models.User, error) {
 
 	return users, nil
 }
+
+func CreateUser(user models.User)(error) {
+	_, err := db.DB.Query("INSERT INTO users (email, password, registration_date) VALUES ($1, $2, NOW())", 
+		user.Email, string(user.Hashed_password))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
