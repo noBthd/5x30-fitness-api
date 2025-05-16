@@ -1,6 +1,8 @@
 package services
 
 import (
+	"errors"
+
 	"github.com/noBthd/5x30-fitness-api/internal/db"
 	"github.com/noBthd/5x30-fitness-api/internal/models"
 )
@@ -46,9 +48,12 @@ func UserExists(email string)([]models.User, error) {
 }
 
 func CreateUser(user models.User)(error) {
+	if len(user.Email) == 0 {
+		return errors.New("email cannot be empty")
+	}
+
 	_, err := db.DB.Query("INSERT INTO users (email, password, registration_date) VALUES ($1, $2, NOW())", 
 		user.Email, string(user.Hashed_password))
-
 	if err != nil {
 		return err
 	}
