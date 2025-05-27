@@ -65,21 +65,7 @@ func SignIn(c *gin.Context) {
 
 	user.Email = c.Query("email")
 	user.Password = c.Query("password")
-
 	log.Print("\n\t", user.Email, "\n\t", user.Password)
-
-	// err = c.ShouldBindJSON(&user)
-	// if err !=  nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
-    //     return
-	// }
-
-	// user.Hashed_password, err = bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
-	// log.Print(string(user.Hashed_password))
-	// if err != nil {
-	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
-    //     return
-	// }
 
 	isLogged := false
 	var userData []models.User 

@@ -18,7 +18,7 @@ func GetAllUsers()([]models.User, error) {
     var users []models.User
     for rows.Next() {
         var user models.User
-        err := rows.Scan(&user.ID, &user.Email, &user.Hashed_password, &user.RegDate, &user.Username)
+        err := rows.Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.RegDate)
         if err != nil {
             return nil, err
         }
@@ -38,7 +38,7 @@ func UserExists(email string)([]models.User, error) {
 	var users []models.User
 	for rows.Next() {
 		var user models.User
-		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.RegDate, &user.Email)
+		err := rows.Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.RegDate)
         if err != nil {
             return nil, err
         }
@@ -73,7 +73,7 @@ func SignIn(userEP models.User)(bool, []models.User, error) {
 	var users []models.User
 	for rows.Next() {
 		var user models.User
-		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.RegDate, &user.Email)
+		err := rows.Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.RegDate)
         if err != nil {
             return false, nil, err
         }
