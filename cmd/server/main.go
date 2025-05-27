@@ -23,5 +23,7 @@ func main() {
 
 	router.POST("/signUp", handlers.CreateUser)
 
+	router.GET("/signIn", handlers.SignIn)
+
     router.Run(":8080")
 }
