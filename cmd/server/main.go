@@ -25,5 +25,7 @@ func main() {
 
 	router.GET("/signIn", handlers.SignIn)
 
+	router.GET("/user", handlers.FindUser)
+
     router.Run(":8080")
 }

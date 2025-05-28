@@ -57,6 +57,10 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create user"})
 		return
 	}
+	var success models.Success
+	success.Status = true
+
+	c.JSON(http.StatusOK, &success)
 }
 
 func SignIn(c *gin.Context) {
@@ -77,6 +81,19 @@ func SignIn(c *gin.Context) {
 	}
 	if !isLogged {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Password or email isn't right"})
+		return
+	}
+
+	c.JSON(http.StatusOK, &userData)
+}
+
+func FindUser(c *gin.Context) {
+	var email = c.Query("email")
+	log.Print("\n\t", email)
+
+	userData, err := services.GetUser(email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return
 	}
 
