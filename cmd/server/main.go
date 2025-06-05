@@ -27,5 +27,7 @@ func main() {
 
 	router.GET("/user", handlers.FindUser)
 
+	router.GET("/getEx", handlers.GetExHandler)
+
     router.Run(":8080")
 }
